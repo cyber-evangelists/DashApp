@@ -1,4 +1,6 @@
-import 'package:dash_app/LoginSignUP/login_screen.dart';
+import 'package:dash_app/Screens/add_guest_on_table_screen.dart';
+import 'package:dash_app/Screens/intersted_screen.dart';
+import 'package:dash_app/Screens/resturent_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: const ResturentScreen(),
     );
   }
 }
