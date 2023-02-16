@@ -1,3 +1,4 @@
+import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/Screens/add_guest_on_table_screen.dart';
 import 'package:dash_app/Screens/intersted_screen.dart';
 import 'package:dash_app/Screens/resturent_screen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ResturentScreen(),
+      home: const HomeScreen()
     );
   }
 }
