@@ -68,7 +68,7 @@ flutter:
     - assets/images/AddGuestOnTable/
     - assets/images/ResturantScreen/
     - assets/images/HomeScreen/
-
+    - assets/images/TableResevationScreen/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
