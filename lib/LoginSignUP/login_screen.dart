@@ -1,6 +1,8 @@
+import 'package:dash_app/Provider/google_signin_provider.dart';
 import 'package:dash_app/const.dart';
 import 'package:dash_app/widgets/signup_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -86,8 +88,12 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 13.0,
                         ),
-                        //Sign Up with Apple
+                        //Sign Up with Google
                         SignUpButton(
+                          onTap: () {
+                            final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                            provider.googleLogin();
+                          },
                           image: Image.asset(
                               'assets/images/Login/flat-color-icons_google.png'),
                           platformName: 'Google',
@@ -95,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 13.0,
                         ),
-                        //Sign Up with Apple
+                        //Sign Up with Facebook
                         SignUpButton(
                           image: Image.asset('assets/images/Login/g10.png'),
                           platformName: 'Facebook',

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "541358957685",
+    "project_id": "dash-app-ffc85",
+    "storage_bucket": "dash-app-ffc85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541358957685:android:6feba6cc9fd96b7bb1843c",
+        "android_client_info": {
+          "package_name": "com.example.dash_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541358957685-s1sslhqvlq1bsnv9a5f4sqta43pp69l3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-yzJbErRYUHeN6Y0FFcaKLJaFtnCCNQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541358957685-ivripodn1t4u1l0nsb5j9cihk4bufri0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "541358957685-g0049f6je7tlfhmdvfjcv437o4u65pq5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dashApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

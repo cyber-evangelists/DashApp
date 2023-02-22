@@ -271,7 +271,7 @@ class ResturentScreen extends StatelessWidget {
               children: [
                 //Left
                 Column(
-                  children: [
+                  children: const [
                     Text(
                           '2 Items',
                           style: TextStyle(

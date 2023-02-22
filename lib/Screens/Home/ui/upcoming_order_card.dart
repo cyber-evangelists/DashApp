@@ -35,7 +35,7 @@ class UpcomingOrderCard extends StatelessWidget {
               ),
               SizedBox(
                 width: 150 * deviceWidth,
-                height: 48 * deviceWidth,
+                height: 40 * deviceWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -59,7 +59,7 @@ class UpcomingOrderCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 10.0 * deviceWidth,
+                height: 5.0 * deviceWidth
               ),
               ElevatedButton(
                 onPressed: () {},
