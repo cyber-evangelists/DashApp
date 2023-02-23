@@ -1,11 +1,5 @@
-import 'package:dash_app/LoginSignUP/login_screen.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
-import 'package:dash_app/Screens/Home/home_screen.dart';
-import 'package:dash_app/Screens/SplashScreen/splash_screen.dart';
-import 'package:dash_app/Screens/add_guest_on_table_screen.dart';
-import 'package:dash_app/Screens/intersted_screen.dart';
-import 'package:dash_app/Screens/resturent_screen.dart';
-import 'package:dash_app/Screens/table_reservation_screen.dart';
+import 'package:dash_app/Screens/TableReservation/table_reservation_screen.dart';
 import 'package:dash_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const TableReservationScreen(),
     );
   }
 }
