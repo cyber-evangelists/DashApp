@@ -1,7 +1,9 @@
+import 'package:dash_app/models/categories.dart';
 import 'package:flutter/material.dart';
 
 class MoodTile extends StatelessWidget {
-  const MoodTile({super.key});
+  final Categories categorie;
+  const MoodTile({super.key, required this.categorie});
 
   @override
   Widget build(BuildContext context) {
@@ -9,10 +11,10 @@ class MoodTile extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20.0),
       child: Column(
         children: [
-          Image.asset('assets/images/HomeScreen/kindpng_1519867 1.png'),
-          const Text(
-            'Veg Only',
-            style: TextStyle(
+          Image.network(categorie.ctImgLink),
+          Text(
+            categorie.ctText,
+            style: const TextStyle(
               fontSize: 15.0,
               fontWeight: FontWeight.w400,
               color: Color.fromRGBO(77, 81, 81, 1),

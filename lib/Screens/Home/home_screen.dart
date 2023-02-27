@@ -15,18 +15,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 2, vsync: this);
 
-    return Scaffold(
-      appBar: buildAppBar(context, tabController),
-      body: TabBarView(controller: tabController, children: const [
-        FirstTabView(),
-        FirstTabView(),
-      ]),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.access_alarm),
+    return SafeArea(
+      child: Scaffold(
+        appBar: buildAppBar(context, tabController),
+        body: TabBarView(controller: tabController, children: const [
+          FirstTabView(),
+          FirstTabView(),
+        ]),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.access_alarm),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: const CustomBottomAppBar(),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

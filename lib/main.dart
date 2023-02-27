@@ -1,5 +1,6 @@
+import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
-import 'package:dash_app/Screens/TableReservation/table_reservation_screen.dart';
+import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,10 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
-    )
+    ),
+    ChangeNotifierProvider(
+      create: (context) => CategoriesProvider(),
+    ),
   ], child: const MyApp()));
 }
 
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TableReservationScreen(),
+      home: const HomeScreen(),
     );
   }
 }

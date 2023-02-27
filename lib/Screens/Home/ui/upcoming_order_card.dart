@@ -8,7 +8,7 @@ class UpcomingOrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
     return Container(
-      margin: const EdgeInsets.only(right: 10.0),
+      margin: const EdgeInsets.only(right: 6.0),
       padding: const EdgeInsets.all(8.0),
       height: 130 * deviceWidth,
       width: 320 * deviceWidth,
@@ -35,7 +35,7 @@ class UpcomingOrderCard extends StatelessWidget {
               ),
               SizedBox(
                 width: 150 * deviceWidth,
-                height: 40 * deviceWidth,
+                height: 30 * deviceWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -59,21 +59,35 @@ class UpcomingOrderCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 5.0 * deviceWidth
+                height: 15.0 * deviceWidth
               ),
               ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                ),
-                child: const Text(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, minimumSize: const Size(61, 22)),
+            child: const Text(
                   'Check in',
                   style: TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w500,
                       color: Color.fromRGBO(57, 81, 177, 1)),
                 ),
-              ),
+          ),
+          
+              // ElevatedButton(
+              //   onPressed: () {},
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Colors.white,
+              //   ),
+              //   child: const Text(
+              //     'Check in',
+              //     style: TextStyle(
+              //         fontSize: 12.0,
+              //         fontWeight: FontWeight.w500,
+              //         color: Color.fromRGBO(57, 81, 177, 1)),
+              //   ),
+              // ),
+          
             ],
           ),
         ],

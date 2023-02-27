@@ -1,19 +1,38 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Screens/Home/ui/buttons_row.dart';
 import 'package:dash_app/Screens/Home/ui/card.dart';
+// import 'package:dash_app/Screens/Home/ui/indicator.dart';
 import 'package:dash_app/Screens/Home/ui/recommended_card.dart';
 import 'package:dash_app/Screens/Home/ui/row.dart';
 import 'package:dash_app/Screens/Home/ui/upcoming_order_card.dart';
 import 'package:dash_app/const.dart';
+import 'package:dash_app/models/categories.dart';
 import 'package:dash_app/widgets/mood_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FirstTabView extends StatelessWidget {
+class FirstTabView extends StatefulWidget {
   const FirstTabView({super.key});
+
+  @override
+  State<FirstTabView> createState() => _FirstTabViewState();
+}
+
+class _FirstTabViewState extends State<FirstTabView> {
+  @override
+  void initState() {
+    context.read<CategoriesProvider>().getCategories();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
+    CategoriesProvider provider = context.watch<CategoriesProvider>();
+    List<Categories> categoriesList =
+        context.watch<CategoriesProvider>().categoriesList;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -79,17 +98,41 @@ class FirstTabView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10.0 * deviceWidth),
-                //Upcoming Order Card's Slider
+                // Upcoming Order Card's Slider
                 CarouselSlider.builder(
                   itemCount: 5,
                   itemBuilder: (context, index, realIndex) {
                     return const UpcomingOrderCard();
                   },
                   options: CarouselOptions(
-                      height: 130.0,
-                      enableInfiniteScroll: false,
-                      padEnds: false),
+                    height: 130.0,
+                    enableInfiniteScroll: false,
+                    padEnds: false,
+                  ),
                 ),
+
+                // Upcoming Order Card's Slider
+                // SizedBox(
+                //   height: 140.0 * deviceWidth,
+                //   child: PageView.builder(
+                //     itemCount: 5,
+                //     itemBuilder: (context, index) => const Padding(
+                //       padding: EdgeInsets.only(left: 18.0),
+                //       child: UpcomingOrderCard(),
+                //     ),
+                //   ),
+                // ),
+
+                // SizedBox(height: 12.0 * deviceWidth),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: const [
+                //     Idicator(isActive: true,),
+                //     Idicator(isActive: false,),
+                //     Idicator(isActive: false,),
+                //   ],
+                // ),
 
                 SizedBox(height: 18.0 * deviceWidth),
 
@@ -102,17 +145,19 @@ class FirstTabView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 14.0 * deviceWidth),
-                SizedBox(
-                  width: 358 * deviceWidth,
-                  height: 104 * deviceWidth,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      return const MoodTile();
-                    },
-                  ),
-                ),
+                provider.fetch
+                    ? SizedBox(
+                        width: 358 * deviceWidth,
+                        height: 104 * deviceWidth,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categoriesList.length,
+                          itemBuilder: (context, index) {
+                            return MoodTile(categorie: categoriesList[index]);
+                          },
+                        ),
+                      )
+                    : const CircularProgressIndicator(),
                 SizedBox(height: 24.0 * deviceWidth),
 
                 //Recommended For You Row
@@ -135,8 +180,9 @@ class FirstTabView extends StatelessWidget {
                     height: 165,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
+                      itemCount: 3,
                       itemBuilder: (context, index) => const Cards(),
-                    )),
+                    ),),
 
                 const SizedBox(height: 20.0),
 

@@ -171,8 +171,13 @@ class _TableReservationScreenState extends State<TableReservationScreen>
 
                   SizedBox(height: 18.0 * deviceWidth),
 
-                  const ReviewCard(),
-
+                  SizedBox(height: 100,
+                  child:  ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, index) => const ReviewCard(),
+                  ),
+                  ),
+                 
                 ],
               ),
             ),

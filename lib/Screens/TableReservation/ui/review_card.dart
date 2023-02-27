@@ -21,11 +21,34 @@ class ReviewCard extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               const SizedBox(width: 9.0),
+              Container(
+                width: 36 * deviceWidth,
+                height: 20 * deviceWidth,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Center(
+                    child: Text(
+                  '5.0',
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
+                )),
+              ),
             ],
           ),
           const SizedBox(height: 9.0),
           const Expanded(
-            child: Text('hi'),
+            child: Text(
+              'Great food I like this place, I think best place of Colarodo. Chilling with Friends :)',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(77, 81, 81, 1),
+              ),
+            ),
           ),
         ],
       ),
