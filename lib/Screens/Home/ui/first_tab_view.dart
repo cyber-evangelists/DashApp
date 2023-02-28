@@ -1,16 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dash_app/Provider/categories.dart';
+import 'package:dash_app/Firebase/read_data.dart';
 import 'package:dash_app/Screens/Home/ui/buttons_row.dart';
 import 'package:dash_app/Screens/Home/ui/card.dart';
-// import 'package:dash_app/Screens/Home/ui/indicator.dart';
 import 'package:dash_app/Screens/Home/ui/recommended_card.dart';
 import 'package:dash_app/Screens/Home/ui/row.dart';
 import 'package:dash_app/Screens/Home/ui/upcoming_order_card.dart';
 import 'package:dash_app/const.dart';
 import 'package:dash_app/models/categories.dart';
+import 'package:dash_app/models/resturant.dart';
 import 'package:dash_app/widgets/mood_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class FirstTabView extends StatefulWidget {
   const FirstTabView({super.key});
@@ -21,17 +20,8 @@ class FirstTabView extends StatefulWidget {
 
 class _FirstTabViewState extends State<FirstTabView> {
   @override
-  void initState() {
-    context.read<CategoriesProvider>().getCategories();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
-    CategoriesProvider provider = context.watch<CategoriesProvider>();
-    List<Categories> categoriesList =
-        context.watch<CategoriesProvider>().categoriesList;
 
     return SingleChildScrollView(
       child: Column(
@@ -145,19 +135,45 @@ class _FirstTabViewState extends State<FirstTabView> {
                   ),
                 ),
                 SizedBox(height: 14.0 * deviceWidth),
-                provider.fetch
-                    ? SizedBox(
+                // provider.fetch
+                //     ? SizedBox(
+                //         width: 358 * deviceWidth,
+                //         height: 104 * deviceWidth,
+                //         child: ListView.builder(
+                //           scrollDirection: Axis.horizontal,
+                //           itemCount: categoriesList.length,
+                //           itemBuilder: (context, index) {
+                //             return MoodTile(categorie: categoriesList[index]);
+                //           },
+                //         ),
+                //       )
+                //     : const CircularProgressIndicator(),
+
+                StreamBuilder(
+                  stream: getCategoriesFirebase(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Categories>? data =
+                          snapshot.data as List<Categories>?;
+                      return SizedBox(
                         width: 358 * deviceWidth,
                         height: 104 * deviceWidth,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: categoriesList.length,
+                          itemCount: data!.length,
                           itemBuilder: (context, index) {
-                            return MoodTile(categorie: categoriesList[index]);
+                            return MoodTile(categorie: data[index]);
                           },
                         ),
-                      )
-                    : const CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
                 SizedBox(height: 24.0 * deviceWidth),
 
                 //Recommended For You Row
@@ -168,21 +184,37 @@ class _FirstTabViewState extends State<FirstTabView> {
                 SizedBox(
                   height: 280.0,
                   width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) => const RecommnendedCard(),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: getAllResturants(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          List<Restaurant>? resturantData =
+                              snapshot.data as List<Restaurant>?;
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: resturantData!.length,
+                            itemBuilder: (context, index) => RecommnendedCard(
+                              restaurant: resturantData[index],
+                            ),
+                          );
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                      }),
                 ),
 
                 //Cards
                 SizedBox(
-                    height: 165,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      itemBuilder: (context, index) => const Cards(),
-                    ),),
+                  height: 165,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) => const Cards(),
+                  ),
+                ),
 
                 const SizedBox(height: 20.0),
 
@@ -194,11 +226,26 @@ class _FirstTabViewState extends State<FirstTabView> {
                 SizedBox(
                   height: 280.0,
                   width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) => const RecommnendedCard(),
-                  ),
+                  child: StreamBuilder<Object>(
+                      stream: getAllResturants(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          List<Restaurant>? resturantData =
+                              snapshot.data as List<Restaurant>?;
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: resturantData!.length,
+                            itemBuilder: (context, index) => RecommnendedCard(
+                              restaurant: resturantData[index],
+                            ),
+                          );
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                      }),
                 ),
               ],
             ),

@@ -1,7 +1,7 @@
 import 'package:dash_app/const.dart';
 import 'package:flutter/material.dart';
 
-buildAppBar(context, tabController) {
+buildAppBar(context, tabController, String name) {
   double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
   return AppBar(
         flexibleSpace: Container(
@@ -17,15 +17,15 @@ buildAppBar(context, tabController) {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       Text(
-                        'Hello Alexa 👋',
-                        style: TextStyle(
+                        '$name 👋',
+                        style: const TextStyle(
                             fontSize: 26.0,
                             fontWeight: FontWeight.w700,
                             color: Colors.white),
                       ),
-                      Text(
+                      const Text(
                         'Eat right! Be tight!',
                         style: TextStyle(
                             fontSize: 14.0,

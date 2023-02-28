@@ -1,8 +1,11 @@
+import 'package:dash_app/Screens/ResturantScreen/resturent_screen.dart';
 import 'package:dash_app/const.dart';
+import 'package:dash_app/models/resturant.dart';
 import 'package:flutter/material.dart';
 
 class RecommnendedCard extends StatelessWidget {
-  const RecommnendedCard({super.key});
+  final Restaurant restaurant;
+  const RecommnendedCard({super.key, required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +16,11 @@ class RecommnendedCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.asset(
-                'assets/images/HomeScreen/BG.png',
+              Image.network(
+                restaurant.bg,
                 colorBlendMode: BlendMode.luminosity,
               ),
-              Positioned(
+              if(restaurant.isClosed) Positioned(
                   bottom: 14,
                   left: 14,
                   child: Container(
@@ -48,24 +51,24 @@ class RecommnendedCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12.0),
-          const Text(
-            'McDonald\'s',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+          Text(
+            restaurant.resturantName,
+            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 6.0),
           Row(
             children: [
-              const Text(
-                'Chinese - American . ',
-                style: TextStyle(
+              Text(
+                restaurant.resturantType,
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 10.0,
                     fontWeight: FontWeight.w400),
               ),
               Image.asset('assets/images/ResturantScreen/Group 1000002214.png'),
-              const Text(
-                ' 4.5 . 35 min',
-                style: TextStyle(
+              Text(
+                ' ${restaurant.rating} . ${restaurant.time}',
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 10.0,
                     fontWeight: FontWeight.w400),

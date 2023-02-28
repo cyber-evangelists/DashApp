@@ -13,25 +13,18 @@ class CategoriesProvider extends ChangeNotifier {
 
   getCategories() {
     try {
-      // FirebaseFirestore.instance.collection('categories').snapshots().map(
-      //     (snapshot) {
-      //       print('hi');
-      //       print('snapshot: $snapshot');
-      //       return snapshot.docs.map(
-            
-      //         (doc) {
-      //           print('doc: $doc');
-      //           categoriesList.add(Categories.fromJson(doc.data()));
-      //         });
-      //     });
-
-      FirebaseFirestore.instance.collection('categories').get().then((snapshot) => snapshot.docs.forEach((element) {categoriesList.add(element.data())}),);
-
-              // fetch = true;
-      print(categoriesList);
+      FirebaseFirestore.instance
+          .collection('categories')
+          .snapshots()
+          .forEach((snapshot) {
+        for (var doc in snapshot.docs) {
+          Categories.fromJson(doc.data());
+        }
+      });
     } catch (error) {
       print(error.toString());
     }
+
     print('FirebaseOutptu: $categoriesList');
     // fetch = true;
     notifyListeners();

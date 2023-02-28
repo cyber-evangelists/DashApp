@@ -35,7 +35,7 @@ class UpcomingOrderCard extends StatelessWidget {
               ),
               SizedBox(
                 width: 150 * deviceWidth,
-                height: 30 * deviceWidth,
+                height: 60 * deviceWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -58,36 +58,42 @@ class UpcomingOrderCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 15.0 * deviceWidth
-              ),
-              ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, minimumSize: const Size(61, 22)),
-            child: const Text(
-                  'Check in',
-                  style: TextStyle(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(57, 81, 177, 1)),
+              Expanded(
+                child: Column(
+                  
+                  children: [
+                    const SizedBox(height: 5.0,),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0, vertical: 5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                      child: const Text(
+                        'Check in',
+                        style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(57, 81, 177, 1)),
+                      ),
+                    ),
+                  ],
                 ),
-          ),
-          
-              // ElevatedButton(
-              //   onPressed: () {},
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Colors.white,
-              //   ),
-              //   child: const Text(
-              //     'Check in',
-              //     style: TextStyle(
-              //         fontSize: 12.0,
-              //         fontWeight: FontWeight.w500,
-              //         color: Color.fromRGBO(57, 81, 177, 1)),
-              //   ),
-              // ),
-          
+                // child: ElevatedButton(
+                //   onPressed: () {},
+                //   style: ElevatedButton.styleFrom(
+                //       backgroundColor: Colors.white,
+                //       minimumSize: const Size(61, 22)),
+                //   child: const Text(
+                //     'Check in',
+                //     style: TextStyle(
+                //         fontSize: 12.0,
+                //         fontWeight: FontWeight.w500,
+                //         color: Color.fromRGBO(57, 81, 177, 1)),
+                //   ),
+                // ),
+              )
             ],
           ),
         ],

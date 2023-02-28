@@ -1,6 +1,8 @@
 import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
 import 'package:dash_app/Screens/Home/home_screen.dart';
+import 'package:dash_app/Screens/LoginSignUP/login_screen.dart';
+import 'package:dash_app/Screens/SplashScreen/splash_screen.dart';
 import 'package:dash_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
