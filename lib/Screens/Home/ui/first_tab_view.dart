@@ -8,8 +8,10 @@ import 'package:dash_app/Screens/Home/ui/upcoming_order_card.dart';
 import 'package:dash_app/const.dart';
 import 'package:dash_app/models/categories.dart';
 import 'package:dash_app/models/resturant.dart';
+import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:dash_app/widgets/mood_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class FirstTabView extends StatefulWidget {
   const FirstTabView({super.key});
@@ -92,7 +94,11 @@ class _FirstTabViewState extends State<FirstTabView> {
                 CarouselSlider.builder(
                   itemCount: 5,
                   itemBuilder: (context, index, realIndex) {
-                    return const UpcomingOrderCard();
+                    return UpcomingOrderCard(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(MyAppRoutesConsts.interstedRouteName);
+                      },
+                    );
                   },
                   options: CarouselOptions(
                     height: 130.0,
@@ -162,7 +168,13 @@ class _FirstTabViewState extends State<FirstTabView> {
                           scrollDirection: Axis.horizontal,
                           itemCount: data!.length,
                           itemBuilder: (context, index) {
-                            return MoodTile(categorie: data[index]);
+                            return MoodTile(
+                              categorie: data[index],
+                              onTap: () {
+                                GoRouter.of(context).pushNamed(MyAppRoutesConsts
+                                    .tableReservationRouteName);
+                              },
+                            );
                           },
                         ),
                       );
@@ -195,13 +207,19 @@ class _FirstTabViewState extends State<FirstTabView> {
                             itemCount: resturantData!.length,
                             itemBuilder: (context, index) => RecommnendedCard(
                               restaurant: resturantData[index],
+                              onTap: () {
+                                GoRouter.of(context).pushNamed(
+                                    MyAppRoutesConsts.resturantRouteName);
+                              },
                             ),
                           );
                         } else if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                       }),
                 ),
@@ -237,13 +255,19 @@ class _FirstTabViewState extends State<FirstTabView> {
                             itemCount: resturantData!.length,
                             itemBuilder: (context, index) => RecommnendedCard(
                               restaurant: resturantData[index],
+                              onTap: () {
+                                GoRouter.of(context).pushNamed(
+                                    MyAppRoutesConsts.resturantRouteName);
+                              },
                             ),
                           );
                         } else if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                       }),
                 ),

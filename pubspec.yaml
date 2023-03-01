@@ -44,6 +44,7 @@ dependencies:
   firebase_storage:
   cloud_firestore:
   go_router:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

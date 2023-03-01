@@ -1,8 +1,12 @@
+import 'package:dash_app/Provider/google_signin_provider.dart';
+import 'package:dash_app/Provider/user.dart';
 import 'package:dash_app/const.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-buildAppBar(context, tabController, String name) {
+buildAppBar(BuildContext context, tabController) {
   double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
+  String? userName = context.read<UserProvider>().userName;
   return AppBar(
         flexibleSpace: Container(
           width: 375 * baseWidth,
@@ -19,7 +23,7 @@ buildAppBar(context, tabController, String name) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
                       Text(
-                        '$name 👋',
+                        '${userName?? 'Hello Alexa'} 👋',
                         style: const TextStyle(
                             fontSize: 26.0,
                             fontWeight: FontWeight.w700,
@@ -34,19 +38,24 @@ buildAppBar(context, tabController, String name) {
                       ),
                     ],
                   ),
-                  Stack(
-                    children: [
-                      Image.asset(
-                          'assets/images/HomeScreen/Group 1000002650.png'),
-                      const Positioned(
-                        right: 0.0,
-                        child: CircleAvatar(
-                          radius: 10.0,
-                          backgroundColor: Colors.white,
-                          child: Text('1'),
+                  InkWell(
+                    onTap: (){
+                      context.read<GoogleSignInProvider>().googleLogout();
+                    },
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                            'assets/images/HomeScreen/Group 1000002650.png'),
+                        const Positioned(
+                          right: 0.0,
+                          child: CircleAvatar(
+                            radius: 10.0,
+                            backgroundColor: Colors.white,
+                            child: Text('1'),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

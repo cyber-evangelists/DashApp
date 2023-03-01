@@ -12,27 +12,42 @@ class GoogleSignInProvider extends ChangeNotifier {
   GoogleSignInAccount get user => _user!;
 
   Future googleLogin() async {
-    try{
+    try {
       final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) return;
+      if (googleUser == null) return;
 
-    _user = googleUser;
+      _user = googleUser;
 
-    final googlAuth = await googleUser.authentication;
+      final googlAuth = await googleUser.authentication;
 
-    final credentials = GoogleAuthProvider.credential(
-      accessToken: googlAuth.accessToken,
-      idToken: googlAuth.idToken,
-    );
+      final credentials = GoogleAuthProvider.credential(
+        accessToken: googlAuth.accessToken,
+        idToken: googlAuth.idToken,
+      );
 
-    final userCreds = await FirebaseAuth.instance.signInWithCredential(credentials);
-    final currentUser = userCreds.user;
-    AppUser user = AppUser(uid: currentUser!.uid, name: currentUser.displayName!, email: currentUser.email!, photoUrl: currentUser.photoURL!);
-    FirebaseFirestore.instance.collection('user').doc(user.uid).set(user.toJson());
-    
-    notifyListeners();
-    } catch (error){
+      final userCreds =
+          await FirebaseAuth.instance.signInWithCredential(credentials);
+      final currentUser = userCreds.user;
+      AppUser user = AppUser(
+        uid: currentUser!.uid,
+        name: currentUser.displayName!,
+        email: currentUser.email!,
+        photoUrl: currentUser.photoURL!,
+      );
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc(user.uid)
+          .set(user.toJson());
+
+      notifyListeners();
+    } catch (error) {
       debugPrint('google signup error: ${error.toString()}');
     }
+  }
+
+  googleLogout() {
+    googleSignIn.disconnect();
+    FirebaseAuth.instance.signOut();
+    notifyListeners();
   }
 }

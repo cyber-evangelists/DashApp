@@ -1,6 +1,7 @@
 import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
-import 'package:dash_app/Screens/SplashScreen/splash_screen.dart';
+import 'package:dash_app/Provider/user.dart';
+import 'package:dash_app/SharedPrefrences/sharedprefrences.dart';
 import 'package:dash_app/firebase_options.dart';
 import 'package:dash_app/routes/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await UserPrefrences.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
@@ -19,6 +21,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => CategoriesProvider(),
     ),
+    ChangeNotifierProvider(create: (context) => UserProvider(),)
   ], child: const MyApp()));
 }
 

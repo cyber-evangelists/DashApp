@@ -6,13 +6,15 @@ class AppUser {
   final String name; // Name of the user
   final String email; // Email address of the user
   final String photoUrl; // Profile image URL of the user
+  final bool? firstLogin;
 
   // Constructor used to create  AppUser Objects
   AppUser(
       {required this.uid,
       required this.name,
       required this.email,
-      required this.photoUrl});
+      required this.photoUrl,
+      this.firstLogin});
 
   // Method used to convert an AppUser instance into a Map instance
   Map<String, dynamic> toJson() => {
@@ -20,6 +22,7 @@ class AppUser {
         'name': name,
         'email': email,
         'photoUrl': photoUrl,
+        'firstLogin': firstLogin,
       };
 
   // Method used to construct an AppUser from a Map
@@ -27,5 +30,7 @@ class AppUser {
       uid: json['uid'],
       name: json['name'],
       email: json['email'],
-      photoUrl: json['photoUrl']);
+      photoUrl: json['photoUrl'],
+      firstLogin: json['firstLogin'],
+      );
 }
