@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_app/models/categories.dart';
 import 'package:dash_app/models/resturant.dart';
+import 'package:flutter/cupertino.dart';
 
 getCategoriesFirebase() {
   try {
@@ -9,7 +10,7 @@ getCategoriesFirebase() {
             .map((doc) => Categories.fromJson(doc.data()))
             .toList());
   } catch (error) {
-    print(error.toString());
+    debugPrint(error.toString());
   }
 }
 
@@ -20,6 +21,6 @@ getAllResturants() {
             .map((doc) => Restaurant.fromJson(doc.data()))
             .toList());
   } catch (error) {
-    print(error.toString());
+    debugPrint(error.toString());
   }
 }

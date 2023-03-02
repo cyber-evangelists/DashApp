@@ -22,10 +22,10 @@ class CategoriesProvider extends ChangeNotifier {
         }
       });
     } catch (error) {
-      print(error.toString());
+      debugPrint(error.toString());
     }
 
-    print('FirebaseOutptu: $categoriesList');
+    debugPrint('FirebaseOutptu: $categoriesList');
     // fetch = true;
     notifyListeners();
   }

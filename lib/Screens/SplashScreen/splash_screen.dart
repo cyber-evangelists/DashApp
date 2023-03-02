@@ -1,5 +1,4 @@
 import 'package:dash_app/Screens/LoginSignUP/login_screen.dart';
-import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/Screens/SplashScreen/ui/splash.dart';
 import 'package:dash_app/Screens/WelcomScreen/welcom_screen.dart';
 import 'package:dash_app/const.dart';

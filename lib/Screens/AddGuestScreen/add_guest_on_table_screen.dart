@@ -27,7 +27,7 @@ class AddGuestOnTableScreen extends StatelessWidget {
           SizedBox(height: 19.0 * deviceWidth),
           Expanded(
             child: ListView(
-              children: [
+              children: const [
                 MyContactCard(),
                 MyContactCard(),
                 MyContactCard(),

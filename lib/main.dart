@@ -1,5 +1,6 @@
 import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
+import 'package:dash_app/Provider/sharedref.dart';
 import 'package:dash_app/Provider/user.dart';
 import 'package:dash_app/SharedPrefrences/sharedprefrences.dart';
 import 'package:dash_app/firebase_options.dart';
@@ -21,7 +22,8 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => CategoriesProvider(),
     ),
-    ChangeNotifierProvider(create: (context) => UserProvider(),)
+    ChangeNotifierProvider(create: (context) => UserProvider(),),
+    ChangeNotifierProvider(create: (context) => SharedPrefrencesProvider(),)
   ], child: const MyApp()));
 }
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dash_app/Provider/sharedref.dart';
 import 'package:dash_app/Provider/user.dart';
 import 'package:dash_app/Screens/Home/home_screen.dart';
-import 'package:dash_app/SharedPrefrences/sharedprefrences.dart';
 import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,30 +36,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       },
     );
 
-    firstLogin = UserPrefrences.getUserInfo() ?? false;
-    print("InitMode: $firstLogin");
-    print('FirebaseLogin: $firebaseFirstLogin');
+    firstLogin =
+        context.read<SharedPrefrencesProvider>().getDataInSharedRef ?? true;
+    debugPrint("InitMode: $firstLogin");
+    debugPrint('FirebaseLogin: $firebaseFirstLogin');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return firstLogin
-        ? const HomeScreen()
-        : Scaffold(
+        ? Scaffold(
             body: Center(
               child: TextButton(
                   onPressed: () async {
-                    await UserPrefrences.saveUserInfo(true);
+                    context
+                        .read<SharedPrefrencesProvider>()
+                        .saveDataInSharedRef(false);
                     await FirebaseFirestore.instance
                         .collection('user')
+                        // ignore: use_build_context_synchronously
                         .doc(context.read<UserProvider>().userId)
-                        .update({'firstLogin': true});
+                        .update({'firstLogin': false});
+                    // ignore: use_build_context_synchronously
                     GoRouter.of(context)
                         .pushReplacementNamed(MyAppRoutesConsts.homeRouteName);
                   },
                   child: const Text('Home Screen')),
             ),
-          );
+          )
+        : const HomeScreen();
   }
 }
