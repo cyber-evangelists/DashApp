@@ -1,3 +1,4 @@
+import 'package:dash_app/Screens/Account/account_screen.dart';
 import 'package:dash_app/Screens/AddGuestScreen/add_guest_on_table_screen.dart';
 import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/Screens/InterstedScreen/intersted_screen.dart';
@@ -14,7 +15,7 @@ class MyAppRoutes {
     GoRoute(
       name: MyAppRoutesConsts.splashRouteName,
       path: '/',
-      builder: (context, state) => const Splash(),
+      builder: (context, state) => const AccountScreen(),
     ),
     GoRoute(
       name: MyAppRoutesConsts.homeSplashRouteName,
@@ -50,6 +51,11 @@ class MyAppRoutes {
       name: MyAppRoutesConsts.addGuestRouteName,
       path: '/add_guest_screen',
       builder: (context, state) => const AddGuestOnTableScreen(),
+    ),
+    GoRoute(
+      name: MyAppRoutesConsts.accountRouteName,
+      path: '/account_screen',
+      builder: (context, state) => const AccountScreen(),
     ),
   ]);
 }

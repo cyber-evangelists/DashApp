@@ -9,7 +9,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   GoogleSignInAccount? _user;
 
-  GoogleSignInAccount get user => _user!;
+  GoogleSignInAccount? get user => _user;
 
   Future googleLogin() async {
     try {
@@ -18,9 +18,9 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       _user = googleUser;
 
-      final googlAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googlAuth = await googleUser.authentication;
 
-      final credentials = GoogleAuthProvider.credential(
+      final OAuthCredential credentials = GoogleAuthProvider.credential(
         accessToken: googlAuth.accessToken,
         idToken: googlAuth.idToken,
       );

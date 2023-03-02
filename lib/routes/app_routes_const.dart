@@ -7,4 +7,5 @@ class MyAppRoutesConsts {
   static const String resturantRouteName = 'resturant_screen';
   static const String tableReservationRouteName = 'table_reservation_screen';
   static const String addGuestRouteName = 'add_guest_screen';
+  static const String accountRouteName = 'account_screen';
 }

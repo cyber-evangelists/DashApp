@@ -46,24 +46,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return firstLogin
-        ? Scaffold(
-            body: Center(
-              child: TextButton(
-                  onPressed: () async {
-                    context
-                        .read<SharedPrefrencesProvider>()
-                        .saveDataInSharedRef(false);
-                    await FirebaseFirestore.instance
-                        .collection('user')
-                        // ignore: use_build_context_synchronously
-                        .doc(context.read<UserProvider>().userId)
-                        .update({'firstLogin': false});
-                    // ignore: use_build_context_synchronously
-                    GoRouter.of(context)
-                        .pushReplacementNamed(MyAppRoutesConsts.homeRouteName);
-                  },
-                  child: const Text('Home Screen')),
-            ),
+        ? Center(
+            child: TextButton(
+                onPressed: () async {
+                  context
+                      .read<SharedPrefrencesProvider>()
+                      .saveDataInSharedRef(false);
+                  await FirebaseFirestore.instance
+                      .collection('user')
+                      .doc(context.read<UserProvider>().userId)
+                      .update({'firstLogin': false});
+                  GoRouter.of(context)
+                      .pushReplacementNamed(MyAppRoutesConsts.homeRouteName);
+                },
+                child: const Text('Home Screen')),
           )
         : const HomeScreen();
   }
