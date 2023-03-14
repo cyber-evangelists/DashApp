@@ -1,4 +1,4 @@
-import 'package:dash_app/Screens/TableReservation/ui/recipe_detail_card_row.dart';
+import 'package:dash_app/Screens/RecipeDetailsScreen/ui/recipe_detail_card_row.dart';
 import 'package:dash_app/const.dart';
 import 'package:flutter/material.dart';
 

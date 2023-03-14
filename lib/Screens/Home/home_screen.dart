@@ -1,4 +1,3 @@
-import 'package:dash_app/Screens/Home/ui/bottom_appbar.dart';
 import 'package:dash_app/Screens/Home/ui/build_app_bar.dart';
 import 'package:dash_app/Screens/Home/ui/first_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +20,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: TabBarView(controller: tabController, children: const [
           FirstTabView(),
           FirstTabView(),
-        ]),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.access_alarm),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: const CustomBottomAppBar(),
+        ]),        
       ),
     );
   }

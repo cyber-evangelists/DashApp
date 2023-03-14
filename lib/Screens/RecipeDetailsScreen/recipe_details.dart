@@ -1,20 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_app/Screens/Home/ui/row.dart';
-import 'package:dash_app/Screens/TableReservation/ui/nutrition_data_column.dart';
-import 'package:dash_app/Screens/TableReservation/ui/recipe_detail_card.dart';
-import 'package:dash_app/Screens/TableReservation/ui/review_card.dart';
-import 'package:dash_app/Screens/TableReservation/ui/tabs.dart';
+import 'package:dash_app/Screens/RecipeDetailsScreen/ui/nutrition_data_column.dart';
+import 'package:dash_app/Screens/RecipeDetailsScreen/ui/recipe_detail_card.dart';
+import 'package:dash_app/Screens/RecipeDetailsScreen/ui/review_card.dart';
+import 'package:dash_app/Screens/RecipeDetailsScreen/ui/tabs.dart';
 import 'package:dash_app/const.dart';
 import 'package:flutter/material.dart';
 
-class TableReservationScreen extends StatefulWidget {
-  const TableReservationScreen({super.key});
+class RecipeDetailsScreen extends StatefulWidget {
+  const RecipeDetailsScreen({super.key});
 
   @override
-  State<TableReservationScreen> createState() => _TableReservationScreenState();
+  State<RecipeDetailsScreen> createState() => _RecipeDetailsScreenState();
 }
 
-class _TableReservationScreenState extends State<TableReservationScreen>
+class _RecipeDetailsScreenState extends State<RecipeDetailsScreen>
     with TickerProviderStateMixin {
   bool readMore = false;
 
