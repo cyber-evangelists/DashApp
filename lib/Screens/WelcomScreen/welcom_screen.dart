@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_app/Provider/sharedref.dart';
 import 'package:dash_app/Provider/user.dart';
+import 'package:dash_app/Screens/Dashboard/dashboard.dart';
 import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:flutter/material.dart';
@@ -57,10 +58,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       .doc(context.read<UserProvider>().userId)
                       .update({'firstLogin': false});
                   GoRouter.of(context)
-                      .pushReplacementNamed(MyAppRoutesConsts.homeRouteName);
+                      .pushReplacementNamed(MyAppRoutesConsts.dashboardRouteName);
                 },
                 child: const Text('Home Screen')),
           )
-        : const HomeScreen();
+        : const DashboardScreen();
   }
 }

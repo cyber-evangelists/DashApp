@@ -1,3 +1,4 @@
+import 'package:dash_app/Screens/Account/Settings/settings.dart';
 import 'package:dash_app/Screens/Account/account_screen.dart';
 import 'package:dash_app/Screens/AddGuestScreen/add_guest_on_table_screen.dart';
 import 'package:dash_app/Screens/Dashboard/dashboard.dart';
@@ -17,7 +18,7 @@ class MyAppRoutes {
     GoRoute(
       name: MyAppRoutesConsts.splashRouteName,
       path: '/',
-      builder: (context, state) => const TableResevationScreen(),
+      builder: (context, state) => const Splash(),
     ),
     GoRoute(
       name: MyAppRoutesConsts.homeSplashRouteName,
@@ -68,6 +69,11 @@ class MyAppRoutes {
       name: MyAppRoutesConsts.accountRouteName,
       path: '/account_screen',
       builder: (context, state) => const AccountScreen(),
+    ),
+    GoRoute(
+      name: MyAppRoutesConsts.settingsRouteName,
+      path: '/setting_screen',
+      builder: (context, state) => const SettingsScreen(),
     ),
   ]);
 }

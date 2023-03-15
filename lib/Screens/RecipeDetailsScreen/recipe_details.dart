@@ -22,6 +22,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen>
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
     double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(238, 241, 242, 1),

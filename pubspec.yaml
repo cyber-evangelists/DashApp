@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore:
   go_router:
   shared_preferences:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

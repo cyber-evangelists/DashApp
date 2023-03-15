@@ -172,7 +172,7 @@ class _FirstTabViewState extends State<FirstTabView> {
                               categorie: data[index],
                               onTap: () {
                                 GoRouter.of(context).pushNamed(MyAppRoutesConsts
-                                    .tableReservationRouteName);
+                                    .recipeDetailRouteName);
                               },
                             );
                           },
