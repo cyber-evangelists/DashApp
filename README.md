@@ -7,7 +7,7 @@ A brief description of what this project does and who it's for
 
 |              App Preview             |             Course Preview           |
 | :----------------------------------: | :----------------------------------: |
-| <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" width="350"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" width="350">|
+| <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" height="350"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" height="350">|
 
 ➜&ensp;[Buy My Courses](https://johannesmilke.teachable.com/p/home "Buy My Courses")
 
