@@ -1,16 +1,21 @@
-# dash_app
 
-A new Flutter project.
+# DashApp
 
-## Getting Started
+A brief description of what this project does and who it's for
 
-This project is a starting point for a Flutter application.
+### ✌&ensp;Preview
 
-A few resources to get you started if this is your first Flutter project:
+|              App Preview             |             Course Preview           |
+| :----------------------------------: | :----------------------------------: |
+| <a href="https://www.youtube.com/watch?v=HSAa9yi0OMA" target="_blank"><img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" width="350"></a> | <a href="https://johannesmilke.teachable.com/p/home" target="_blank"><img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428862.jpg" width="350"></a> |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+➜&ensp;[Buy My Courses](https://johannesmilke.teachable.com/p/home "Buy My Courses")
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Features
+
+- Light/dark mode toggle
+- Live previews
+- Fullscreen mode
+- Cross platform
+
