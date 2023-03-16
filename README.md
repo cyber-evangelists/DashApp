@@ -17,7 +17,7 @@ A brief description of what this project does and who it's for
 
 |              Home Screen           |             Intersted Screen          |            Restaurant Screen          |
 | :----------------------------------: | :----------------------------------: | :----------------------------------: |
-| <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428818.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428813.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app//1677573782714.jpg" height="450"> |
+| <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428818.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428813.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app//1678928428818.jpg" height="450"> |
 
 
 
