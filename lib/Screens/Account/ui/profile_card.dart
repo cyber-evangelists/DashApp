@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key});
+  final void Function()? onTap;
+  const ProfileCard({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -40,23 +41,26 @@ class ProfileCard extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text(
-                  'View profile',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.w500,
+            InkWell(
+              onTap: onTap,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    'View profile',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                Icon(
-                  Icons.arrow_right,
-                  color: Colors.white,
-                )
-              ],
+                  Icon(
+                    Icons.arrow_right,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
           ],
         ),

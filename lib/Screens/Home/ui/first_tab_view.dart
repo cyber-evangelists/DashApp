@@ -156,7 +156,7 @@ class _FirstTabViewState extends State<FirstTabView> {
                 //     : const CircularProgressIndicator(),
 
                 StreamBuilder(
-                  stream: getCategoriesFirebase(),
+                  stream: FirebaseDataMethods().getCategoriesFirebase(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       List<Categories>? data =
@@ -197,7 +197,7 @@ class _FirstTabViewState extends State<FirstTabView> {
                   height: 280.0,
                   width: double.infinity,
                   child: StreamBuilder<Object>(
-                      stream: getAllResturants(),
+                      stream: FirebaseDataMethods().getAllResturants(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           List<Restaurant>? resturantData =
@@ -245,7 +245,7 @@ class _FirstTabViewState extends State<FirstTabView> {
                   height: 280.0,
                   width: double.infinity,
                   child: StreamBuilder<Object>(
-                      stream: getAllResturants(),
+                      stream: FirebaseDataMethods().getAllResturants(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           List<Restaurant>? resturantData =

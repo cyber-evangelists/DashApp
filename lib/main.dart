@@ -41,8 +41,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
+  Widget build(BuildContext context) => MaterialApp.router(
       title: 'Flutter Demo',
       themeMode: ThemeMode.system,
       theme: MyThemes.lightTheme,
@@ -50,5 +49,4 @@ class MyApp extends StatelessWidget {
       routeInformationParser: MyAppRoutes().goRouter.routeInformationParser,
       routerDelegate: MyAppRoutes().goRouter.routerDelegate,
     );
-  }
 }

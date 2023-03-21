@@ -27,7 +27,12 @@ class AccountScreen extends StatelessWidget {
       body: Column(
         children: [
           20.ph,
-          const ProfileCard(),
+          ProfileCard(
+            onTap: () {
+              GoRouter.of(context)
+                  .pushNamed(MyAppRoutesConsts.profilePageRouteName);
+            },
+          ),
           24.ph,
           Expanded(
             child: SingleChildScrollView(
@@ -45,18 +50,20 @@ class AccountScreen extends StatelessWidget {
                       leadingIcon: Icons.notifications_none_outlined,
                       title: 'Notificaions'),
                   SettingsTile(
-                      onTap: () {
-                        GoRouter.of(context).pushNamed(MyAppRoutesConsts.settingsRouteName);
-                      },
-                      leadingIcon: Icons.settings_outlined,
-                      title: 'Settigns',),
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed(MyAppRoutesConsts.settingsRouteName);
+                    },
+                    leadingIcon: Icons.settings_outlined,
+                    title: 'Settigns',
+                  ),
                   const SettingType(
                     title: 'Food Orders',
                   ),
                   SettingsTile(
                       onTap: () {},
                       leadingIcon: Icons.shopping_cart_outlined,
-                      title: 'Settigns'),
+                      title: 'Your Orders'),
                   SettingsTile(
                       onTap: () {},
                       leadingIcon: Icons.favorite_outline,
@@ -77,9 +84,13 @@ class AccountScreen extends StatelessWidget {
                       leadingIcon: Icons.message_outlined,
                       title: 'Table booking help'),
                   SettingsTile(
-                      onTap: () {},
-                      leadingIcon: Icons.person_2_outlined,
-                      title: 'Friends'),
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed(MyAppRoutesConsts.addGuestRouteName);
+                    },
+                    leadingIcon: Icons.person_2_outlined,
+                    title: 'Friends',
+                  ),
                   const SettingType(
                     title: 'other',
                   ),

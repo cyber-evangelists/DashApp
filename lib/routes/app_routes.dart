@@ -5,6 +5,8 @@ import 'package:dash_app/Screens/Dashboard/dashboard.dart';
 import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/Screens/InterstedScreen/intersted_screen.dart';
 import 'package:dash_app/Screens/LoginSignUP/login_screen.dart';
+import 'package:dash_app/Screens/Profile/edit_profile.dart';
+import 'package:dash_app/Screens/Profile/profile.dart';
 import 'package:dash_app/Screens/ResturantScreen/resturent_screen.dart';
 import 'package:dash_app/Screens/SplashScreen/splash_screen.dart';
 import 'package:dash_app/Screens/SplashScreen/ui/splash.dart';
@@ -18,8 +20,13 @@ class MyAppRoutes {
     GoRoute(
       name: MyAppRoutesConsts.splashRouteName,
       path: '/',
-      builder: (context, state) => const Splash(),
+      builder: (context, state) => const AccountScreen(),
     ),
+    // GoRoute(
+    //   name: MyAppRoutesConsts.splashRouteName,
+    //   path: '/',
+    //   builder: (context, state) => const Splash(),
+    // ),
     GoRoute(
       name: MyAppRoutesConsts.homeSplashRouteName,
       path: '/splash',
@@ -69,6 +76,16 @@ class MyAppRoutes {
       name: MyAppRoutesConsts.accountRouteName,
       path: '/account_screen',
       builder: (context, state) => const AccountScreen(),
+    ),
+    GoRoute(
+      name: MyAppRoutesConsts.profilePageRouteName,
+      path: '/profile_page',
+      builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      name: MyAppRoutesConsts.profileRouteName,
+      path: '/profile_screen',
+      builder: (context, state) => const ProfileScreen(),
     ),
     GoRoute(
       name: MyAppRoutesConsts.settingsRouteName,

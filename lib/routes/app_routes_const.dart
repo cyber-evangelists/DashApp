@@ -10,5 +10,7 @@ class MyAppRoutesConsts {
   static const String tableReservationRouteName = 'table_reservation_screen';
   static const String addGuestRouteName = 'add_guest_screen';
   static const String accountRouteName = 'account_screen';
+  static const String profileRouteName = 'profile_screen';
   static const String settingsRouteName = 'setting_screen';
+  static const String profilePageRouteName = 'profile_page';
 }
