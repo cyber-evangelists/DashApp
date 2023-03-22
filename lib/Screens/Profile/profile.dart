@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dash_app/Firebase/imagepick.dart';
 import 'package:dash_app/Firebase/storage_methods.dart';
 import 'package:dash_app/Provider/user.dart';
+import 'package:dash_app/const.dart';
 import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -38,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        backgroundColor: primaryColor,
       ),
       body: Column(
         children: [
@@ -74,6 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     GoRouter.of(context)
                         .pushNamed(MyAppRoutesConsts.profilePageRouteName);
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor, // set the background color
+                  ),
                   child: const Text('Edit Profile'),
                 ),
               ],
@@ -105,8 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             await FirebaseStorageMethods.uploadImageToStorage(
                 file: image, isPost: true);
             Fluttertoast.showToast(msg: 'Image Uploaded Successfully');
-          }
-          else {
+          } else {
             Fluttertoast.showToast(msg: 'Image Upload Failed');
           }
         },
