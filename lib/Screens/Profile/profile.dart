@@ -1,9 +1,12 @@
 import 'dart:typed_data';
-import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:dash_app/Firebase/imagepick.dart';
 import 'package:dash_app/Firebase/storage_methods.dart';
 import 'package:dash_app/Provider/user.dart';
+import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -14,64 +17,100 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Uint8List? _image;
-  final picker = ImagePicker();
-
-  Future getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      _image = await pickedFile.readAsBytes();
-    } else {
-      print('No image selected.');
-    }
-    setState(() {
-      _image = _image;
-    });
-  }
+  final List<String> _images = [
+    'https://picsum.photos/id/237/200/300',
+    'https://picsum.photos/id/238/200/300',
+    'https://picsum.photos/id/239/200/300',
+    'https://picsum.photos/id/240/200/300',
+    'https://picsum.photos/id/241/200/300',
+    'https://picsum.photos/id/242/200/300',
+    'https://picsum.photos/id/243/200/300',
+    'https://picsum.photos/id/244/200/300',
+    'https://picsum.photos/id/247/200/300',
+    'https://picsum.photos/id/248/200/300',
+    'https://picsum.photos/id/249/200/300',
+    'https://picsum.photos/id/250/200/300',
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.read<UserProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.read<UserProvider>().userName ?? "Alexa"),
+        title: const Text('Profile'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (_image != null)
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: MemoryImage(_image!),
-              ),
-            ElevatedButton(
-              onPressed: () {
-                _image == null
-                    ? getImage()
-                    : StorageMethods.uploadImageToStorage(
-                        file: _image!, isPost: true);
-              },
-              child: Text(_image == null ? "Select Image" : "Upload Image"),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 3,
-                children: List.generate(10, (index) {
-                  return Container(
-                    margin: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Center(
-                      child: CachedNetworkImage(
-                          imageUrl:
-                              'https://firebasestorage.googleapis.com/v0/b/dash-app-ffc85.appspot.com/o/UserPhotos%2FAlexa%2F722f3a5b-31c4-4950-b134-4a280c44c20d?alt=media&token=32888730-525b-403e-96ea-add85e62e3cd'),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: NetworkImage(provider.userProfileImg ??
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      provider.userName ?? 'John Doe',
+                      style: const TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  );
-                }),
-              ),
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      '10 posts',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    GoRouter.of(context)
+                        .pushNamed(MyAppRoutesConsts.profilePageRouteName);
+                  },
+                  child: const Text('Edit Profile'),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(8.0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              itemCount: _images.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Image.network(
+                  _images[index],
+                  fit: BoxFit.cover,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final Uint8List? image = await getImage();
+          if (image != null) {
+            await FirebaseStorageMethods.uploadImageToStorage(
+                file: image, isPost: true);
+            Fluttertoast.showToast(msg: 'Image Uploaded Successfully');
+          }
+          else {
+            Fluttertoast.showToast(msg: 'Image Upload Failed');
+          }
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

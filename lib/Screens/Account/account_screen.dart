@@ -42,6 +42,12 @@ class AccountScreen extends StatelessWidget {
                     title: 'Content',
                   ),
                   SettingsTile(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(MyAppRoutesConsts.profileRouteName);
+                      },
+                      leadingIcon: Icons.person_outline,
+                      title: 'Yout Profile'),
+                  SettingsTile(
                       onTap: () {},
                       leadingIcon: Icons.favorite_outline,
                       title: 'Like'),

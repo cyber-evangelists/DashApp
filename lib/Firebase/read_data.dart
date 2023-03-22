@@ -32,8 +32,8 @@ class FirebaseDataMethods {
     }
   }
 
-  updateUserProfile(
-      {required String name, required String email, required String photoUrl}) {
+  updateUserProfile({required String name, required String email, required String photoUrl}) {
+    String result = 'Profile Updated';
     try {
       if (_auth.currentUser?.uid == null) return;
       FirebaseFirestore.instance
@@ -45,7 +45,8 @@ class FirebaseDataMethods {
         'photoUrl': photoUrl,
       });
     } catch (error) {
-      debugPrint(error.toString());
+      result = error.toString();
     }
+    return result;
   }
 }

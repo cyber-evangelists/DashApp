@@ -1,10 +1,11 @@
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class StorageMethods {
+class FirebaseStorageMethods {
   static final FirebaseStorage _storage = FirebaseStorage.instance;
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static late Reference _ref;
@@ -29,6 +30,17 @@ class StorageMethods {
       TaskSnapshot snapshot = await uploadTask;
       String downloadUrl = await snapshot.ref.getDownloadURL();
       debugPrint(downloadUrl);
+
+      if (isPost) {
+        FirebaseFirestore.instance
+            .collection('UserPosts')
+            .doc(_auth.currentUser?.uid)
+            .collection('Posts')
+            .add({
+          'postImage': downloadUrl,
+          'postTime': Timestamp.now(),
+        });
+      }
       return downloadUrl;
     }
 

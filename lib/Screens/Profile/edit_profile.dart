@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  late var _profilePicture;
+  late ImageProvider<Object> _profilePicture;
   Uint8List? _image;
   // Image to be used as profile picture  AssetImage _profilePicture;
   @override
@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = FirebaseAuth.instance;
+    final auth = FirebaseAuth.instance;
     final provider = context.read<UserProvider>();
     _nameController.text = provider.userName ?? "";
     _emailController.text = provider.userEmail ?? "";
@@ -110,19 +110,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           const Center(child: CircularProgressIndicator()));
 
                   // Upload image to storage and get the url
-                  String? photoUrl = await StorageMethods.uploadImageToStorage(
+                  String? photoUrl = await FirebaseStorageMethods.uploadImageToStorage(
                       file: _image, isPost: false);
                   photoUrl ??= provider.userProfileImg;
-                  _auth.currentUser!.updateDisplayName(_nameController.text);
-                  _auth.currentUser!.updateEmail(_emailController.text);
-                  _auth.currentUser!.updatePhotoURL(photoUrl);
+                  auth.currentUser!.updateDisplayName(_nameController.text);
+                  auth.currentUser!.updateEmail(_emailController.text);
+                  auth.currentUser!.updatePhotoURL(photoUrl);
 
                   // Update user profile
-                  await FirebaseDataMethods().updateUserProfile(
+                  final String result = await FirebaseDataMethods().updateUserProfile(
                       name: _nameController.text,
                       email: _emailController.text,
                       photoUrl: photoUrl!);
-                      Fluttertoast.showToast(msg: 'Profile Updated');
+                      Fluttertoast.showToast(msg: result);
                   Navigator.pop(context);
                 },
                 child: Container(
