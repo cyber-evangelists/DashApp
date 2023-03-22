@@ -5,8 +5,12 @@ class UserProvider with ChangeNotifier {
   final _user = FirebaseAuth.instance.currentUser;
 
   void refreshUser() {
-    _user!.reload();
-    notifyListeners();
+    try {
+      _user!.reload();
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error refreshing user: $e');
+    }
   }
 
   String? get userName => _user?.displayName;
