@@ -6,6 +6,7 @@ import 'package:dash_app/Firebase/storage_methods.dart';
 import 'package:dash_app/Provider/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -110,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Upload image to storage and get the url
                   String? photoUrl = await StorageMethods.uploadImageToStorage(
-                      childName: 'UserPhotos', file: _image);
+                      file: _image, isPost: false);
                   photoUrl ??= provider.userProfileImg;
                   _auth.currentUser!.updateDisplayName(_nameController.text);
                   _auth.currentUser!.updateEmail(_emailController.text);
@@ -121,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       name: _nameController.text,
                       email: _emailController.text,
                       photoUrl: photoUrl!);
-                  context.read<UserProvider>().refreshUser();
+                      Fluttertoast.showToast(msg: 'Profile Updated');
                   Navigator.pop(context);
                 },
                 child: Container(

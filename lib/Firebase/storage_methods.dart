@@ -7,17 +7,25 @@ import 'package:uuid/uuid.dart';
 class StorageMethods {
   static final FirebaseStorage _storage = FirebaseStorage.instance;
   static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static late Reference _ref;
 
   static Future uploadImageToStorage(
-      {required String childName, required Uint8List? file}) async {
-    Reference ref = _storage
-        .ref()
-        .child(childName)
-        .child(_auth.currentUser?.displayName ?? 'Alexa')
-        .child(const Uuid().v4());
+      {required Uint8List? file, required bool isPost}) async {
+    if (isPost) {
+      _ref = _storage
+          .ref()
+          .child('UserPhotos')
+          .child(_auth.currentUser?.uid ?? 'Random Uid')
+          .child(const Uuid().v4());
+    } else {
+      _ref = _storage
+          .ref()
+          .child('UserProfile')
+          .child(_auth.currentUser?.uid ?? 'Random Uid');
+    }
 
     if (file != null) {
-      UploadTask uploadTask = ref.putData(file);
+      UploadTask uploadTask = _ref.putData(file);
       TaskSnapshot snapshot = await uploadTask;
       String downloadUrl = await snapshot.ref.getDownloadURL();
       debugPrint(downloadUrl);

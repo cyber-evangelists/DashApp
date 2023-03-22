@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
- const ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 _image == null
                     ? getImage()
                     : StorageMethods.uploadImageToStorage(
-                        childName: 'UserPhotos', file: _image!);
+                        file: _image!, isPost: true);
               },
               child: Text(_image == null ? "Select Image" : "Upload Image"),
             ),
@@ -62,7 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     margin: const EdgeInsets.all(8),
                     color: Colors.grey[300],
                     child: Center(
-                      child: CachedNetworkImage(imageUrl: 'https://firebasestorage.googleapis.com/v0/b/dash-app-ffc85.appspot.com/o/UserPhotos%2FAlexa%2F722f3a5b-31c4-4950-b134-4a280c44c20d?alt=media&token=32888730-525b-403e-96ea-add85e62e3cd'),
+                      child: CachedNetworkImage(
+                          imageUrl:
+                              'https://firebasestorage.googleapis.com/v0/b/dash-app-ffc85.appspot.com/o/UserPhotos%2FAlexa%2F722f3a5b-31c4-4950-b134-4a280c44c20d?alt=media&token=32888730-525b-403e-96ea-add85e62e3cd'),
                     ),
                   );
                 }),
