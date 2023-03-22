@@ -18,7 +18,8 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       _user = googleUser;
 
-      final GoogleSignInAuthentication googlAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googlAuth =
+          await googleUser.authentication;
 
       final OAuthCredential credentials = GoogleAuthProvider.credential(
         accessToken: googlAuth.accessToken,
@@ -27,17 +28,27 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       final userCreds =
           await FirebaseAuth.instance.signInWithCredential(credentials);
+
+      //after google login, check if user exists in firestore, if not, add user to firestore
       final currentUser = userCreds.user;
-      AppUser user = AppUser(
-        uid: currentUser!.uid,
-        name: currentUser.displayName!,
-        email: currentUser.email!,
-        photoUrl: currentUser.photoURL!,
-      );
-      FirebaseFirestore.instance
-          .collection('user')
-          .doc(user.uid)
-          .set(user.toJson());
+      FirebaseFirestore.instance.collection('user').get().then((value) {
+        for (var element in value.docs) {
+          if (element.id == currentUser!.uid) {
+            debugPrint('user already exists');
+          } else {
+            AppUser user = AppUser(
+              uid: currentUser.uid,
+              name: currentUser.displayName!,
+              email: currentUser.email!,
+              photoUrl: currentUser.photoURL!,
+            );
+            FirebaseFirestore.instance
+                .collection('user')
+                .doc(user.uid)
+                .set(user.toJson());
+          }
+        }
+      });
 
       notifyListeners();
     } catch (error) {

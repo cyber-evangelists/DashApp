@@ -17,16 +17,16 @@ import 'package:go_router/go_router.dart';
 
 class MyAppRoutes {
   final GoRouter goRouter = GoRouter(routes: <GoRoute>[
-    GoRoute(
-      name: MyAppRoutesConsts.splashRouteName,
-      path: '/',
-      builder: (context, state) => const AccountScreen(),
-    ),
     // GoRoute(
     //   name: MyAppRoutesConsts.splashRouteName,
     //   path: '/',
-    //   builder: (context, state) => const Splash(),
+    //   builder: (context, state) => const AccountScreen(),
     // ),
+    GoRoute(
+      name: MyAppRoutesConsts.splashRouteName,
+      path: '/',
+      builder: (context, state) => const Splash(),
+    ),
     GoRoute(
       name: MyAppRoutesConsts.homeSplashRouteName,
       path: '/splash',

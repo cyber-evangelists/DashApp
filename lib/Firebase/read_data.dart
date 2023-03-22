@@ -35,9 +35,10 @@ class FirebaseDataMethods {
   updateUserProfile(
       {required String name, required String email, required String photoUrl}) {
     try {
+      if (_auth.currentUser?.uid == null) return;
       FirebaseFirestore.instance
           .collection('user')
-          .doc(_auth.currentUser?.uid ?? 'NvrZEEZJzfSQT3dqUYcBTEekJIt1')
+          .doc(_auth.currentUser!.uid)
           .update({
         'name': name,
         'email': email,

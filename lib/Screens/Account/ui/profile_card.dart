@@ -10,7 +10,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double deviceWidth = getDeviceWidth(context);
-    final provider = context.read<UserProvider>();
+    final provider = context.watch<UserProvider>();
     return Container(
       width: 344 * deviceWidth,
       height: 93 * deviceWidth,

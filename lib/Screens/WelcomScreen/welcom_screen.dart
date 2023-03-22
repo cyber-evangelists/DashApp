@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_app/Provider/sharedref.dart';
 import 'package:dash_app/Provider/user.dart';
 import 'package:dash_app/Screens/Dashboard/dashboard.dart';
-import 'package:dash_app/Screens/Home/home_screen.dart';
 import 'package:dash_app/routes/app_routes_const.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -31,15 +30,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
-        await getFirstLogin();
-      },
-    );
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //   (timeStamp) async {
+    //     await getFirstLogin();
+    //   },
+    // );
 
     firstLogin =
         context.read<SharedPrefrencesProvider>().getDataInSharedRef ?? true;
-    debugPrint("InitMode: $firstLogin");
     debugPrint('FirebaseLogin: $firebaseFirstLogin');
     super.initState();
   }

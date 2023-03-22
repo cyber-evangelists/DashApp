@@ -4,6 +4,7 @@ import 'package:dash_app/Firebase/imagepick.dart';
 import 'package:dash_app/Firebase/read_data.dart';
 import 'package:dash_app/Firebase/storage_methods.dart';
 import 'package:dash_app/Provider/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,95 +31,120 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+    final provider = context.read<UserProvider>();
+    _nameController.text = provider.userName ?? "";
+    _emailController.text = provider.userEmail ?? "";
+
     return Scaffold(
-        body: ListView(
-      // Set the padding of the ListView
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Image
-            InkWell(
-              onTap: () async {
-                Uint8List? image = await getImage();
-                if (image != null) {
-                  setState(() {
-                    _profilePicture = MemoryImage(image);
-                    _image = image;
-                  });
-                }
-              },
-              child: CircleAvatar(
-                radius: 70.0, // size of the image
-                backgroundImage: _profilePicture,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            // Label for text fields
-            const Text('NAME',
-                style: TextStyle(fontSize: 15.0, color: Colors.grey)),
-            // Text Field
-            TextFormField(
-              controller: _nameController,
-              initialValue: context.read<UserProvider>().userName,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: const BorderSide(color: Colors.green)),
-                hintText: 'John Doe',
-              ),
-            ),
-            const SizedBox(height: 20.0),
-
-            // Label for text fields
-            const Text('EMAIL',
-                style: TextStyle(fontSize: 15.0, color: Colors.grey)),
-            // Text Field
-            TextFormField(
-              controller: _emailController,
-              initialValue: context.read<UserProvider>().userEmail,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: const BorderSide(color: Colors.green)),
-                hintText: 'jdoe@gmail.com',
-              ),
-            ),
-            const SizedBox(height: 30.0),
-
-            //Save Button
-            InkWell(
-              onTap: () async {
-                final photoUrl = await StorageMethods.uploadImageToStorage(
-                    childName: 'UserPhotos', file: _image!);
-
-                await FirebaseDataMethods().updateUserProfile(
-                    name: _nameController.text,
-                    email: _emailController.text,
-                    photoUrl: photoUrl);
-              },
-              child: Container(
-                height: 60.0,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(30.0),
+        body: Center(
+      child: ListView(
+        // Set the padding of the ListView
+        padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 20.0),
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image
+              InkWell(
+                onTap: () async {
+                  Uint8List? image = await getImage();
+                  if (image != null) {
+                    setState(() {
+                      _profilePicture = MemoryImage(image);
+                      _image = image;
+                    });
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 70.0, // size of the image
+                  backgroundImage: _profilePicture,
                 ),
-                child: const Text(
-                  'UPDATE PROFILE',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              ),
+              const SizedBox(height: 20.0),
+              // Label for text fields
+              const Text('NAME',
+                  style: TextStyle(fontSize: 15.0, color: Colors.grey)),
+              // Text Field
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(color: Colors.green)),
+                    hintText: 'Alexa'),
+              ),
+              const SizedBox(height: 20.0),
+
+              // Label for text fields
+              const Text('EMAIL',
+                  style: TextStyle(fontSize: 15.0, color: Colors.grey)),
+              // Text Field
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: const BorderSide(color: Colors.green)),
+                  hintText: 'jdoe@gmail.com',
+                ),
+              ),
+              const SizedBox(height: 30.0),
+
+              //Save Button
+              InkWell(
+                onTap: () async {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) =>
+                          const Center(child: CircularProgressIndicator()));
+
+                  // Upload image to storage and get the url
+                  String? photoUrl = await StorageMethods.uploadImageToStorage(
+                      childName: 'UserPhotos', file: _image);
+                  photoUrl ??= provider.userProfileImg;
+                  _auth.currentUser!.updateDisplayName(_nameController.text);
+                  _auth.currentUser!.updateEmail(_emailController.text);
+                  _auth.currentUser!.updatePhotoURL(photoUrl);
+
+                  // Update user profile
+                  await FirebaseDataMethods().updateUserProfile(
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      photoUrl: photoUrl!);
+                  context.read<UserProvider>().refreshUser();
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 60.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: const Text(
+                    'UPDATE PROFILE',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     ));
   }
 }
