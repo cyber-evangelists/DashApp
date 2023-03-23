@@ -19,6 +19,10 @@ A brief description of what this project does and who it's for
 | :----------------------------------: | :----------------------------------: | :----------------------------------: |
 | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928494478.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428813.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1678928428818.jpg" height="450"> |
 
+|              User Profile           |             Post Screen         |            Update Profile Screen          |
+| :----------------------------------: | :----------------------------------: | :----------------------------------: |
+| <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1679551076334.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1679551205162.jpg" height="450"> | <img src="https://raw.githubusercontent.com/cyber-evangelists/DashApp/main/assets/app/1679551076329.jpg" height="450"> |
+
 
 
 ## Features

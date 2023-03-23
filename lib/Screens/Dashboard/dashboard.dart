@@ -21,110 +21,126 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
 
-    return Scaffold(
-      body: screensList[currentIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.access_alarm),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 76 * deviceWidth,
-          padding: const EdgeInsets.fromLTRB(18, 9, 18, 20),
-          decoration: const BoxDecoration(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              border: Border(
-                  top: BorderSide(
-                      color: Color.fromRGBO(236, 240, 240, 1), width: 1.0))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentIndex = 0;
-                      });
-                    },
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          currentIndex == 0 ? Icons.home : Icons.home_outlined,
-                          color:
-                              currentIndex == 0 ? primaryColor : Colors.black,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
+    return WillPopScope(
+      onWillPop: () async {
+        if (currentIndex == 0) {
+          return true;
+        } else {
+          setState(() {
+            currentIndex = 0;
+          });
+          return false;
+        }
+      },
+      child: Scaffold(
+        body: screensList[currentIndex],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.access_alarm),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 76 * deviceWidth,
+            padding: const EdgeInsets.fromLTRB(18, 9, 18, 20),
+            decoration: const BoxDecoration(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                border: Border(
+                    top: BorderSide(
+                        color: Color.fromRGBO(236, 240, 240, 1), width: 1.0))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          currentIndex = 0;
+                        });
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            currentIndex == 0
+                                ? Icons.home
+                                : Icons.home_outlined,
                             color:
                                 currentIndex == 0 ? primaryColor : Colors.black,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'Home',
+                            style: TextStyle(
+                              color: currentIndex == 0
+                                  ? primaryColor
+                                  : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed: () {},
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.home),
-                        Text('Home'),
-                      ],
+                    MaterialButton(
+                      onPressed: () {},
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.home),
+                          Text('Home'),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    onPressed: () {},
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.home),
-                        Text('Home'),
-                      ],
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {},
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.home),
+                          Text('Home'),
+                        ],
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentIndex = 1;
-                      });
-                    },
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          currentIndex == 1
-                              ? Icons.person_2
-                              : Icons.person_2_outlined,
-                          color:
-                              currentIndex == 1 ? primaryColor : Colors.black,
-                        ),
-                        Text(
-                          'Account',
-                          style: TextStyle(
+                    MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          currentIndex = 1;
+                        });
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            currentIndex == 1
+                                ? Icons.person_2
+                                : Icons.person_2_outlined,
                             color:
                                 currentIndex == 1 ? primaryColor : Colors.black,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'Account',
+                            style: TextStyle(
+                              color: currentIndex == 1
+                                  ? primaryColor
+                                  : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

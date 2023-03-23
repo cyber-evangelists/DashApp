@@ -2,6 +2,7 @@ import 'package:dash_app/Provider/categories.dart';
 import 'package:dash_app/Provider/google_signin_provider.dart';
 import 'package:dash_app/Provider/sharedref.dart';
 import 'package:dash_app/Provider/user.dart';
+import 'package:dash_app/Provider/user_posts.dart';
 import 'package:dash_app/SharedPrefrences/sharedprefrences.dart';
 import 'package:dash_app/Theme/theme.dart';
 import 'package:dash_app/Theme/theme_manager.dart';
@@ -32,6 +33,9 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => SharedPrefrencesProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => UserPostsProvider(),
     )
   ], child: const MyApp()));
 }
@@ -42,12 +46,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
-      routeInformationParser: MyAppRoutes().goRouter.routeInformationParser,
-      routerDelegate: MyAppRoutes().goRouter.routerDelegate,
-    );
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        theme: MyThemes.lightTheme,
+        darkTheme: MyThemes.darkTheme,
+        routeInformationParser: MyAppRoutes().goRouter.routeInformationParser,
+        routerDelegate: MyAppRoutes().goRouter.routerDelegate,
+      );
 }

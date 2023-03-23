@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_app/models/categories.dart';
 import 'package:dash_app/models/resturant.dart';
@@ -32,7 +34,24 @@ class FirebaseDataMethods {
     }
   }
 
-  updateUserProfile({required String name, required String email, required String photoUrl}) {
+  getUserPosts() {
+    try {
+      return FirebaseFirestore.instance
+          .collection('UserPosts')
+          .doc(_auth.currentUser!.uid)
+          .collection('Posts').get().then((snapshot) => snapshot.docs
+              .map((doc) => doc.data())
+              .toList());
+          // .snapshots()
+          // .map((snapshot) =>
+          //     snapshot.docs.map((doc) => doc.data()).toList());
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  updateUserProfile(
+      {required String name, required String email, required String photoUrl}) {
     String result = 'Profile Updated';
     try {
       if (_auth.currentUser?.uid == null) return;
