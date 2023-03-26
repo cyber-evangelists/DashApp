@@ -1,7 +1,7 @@
 
 # DashApp
 
-A brief description of what this project does and who it's for
+DashApp is a mobile application that provides users with a platform to discover and share recipes, as well as connect with other food enthusiasts. The app allows users to create an account, browse through a variety of recipes, save their favorite recipes, and even share their own recipes with the community.
 
 ### ✌&ensp;App Screenshots
 
@@ -27,8 +27,13 @@ A brief description of what this project does and who it's for
 
 ## Features
 
+- User authentication with email and Google sign-in
+- Recipe browsing and searching
+- Recipe saving and sharing
+- User profile creation and customization
+- Recipe posting and editing
 - Light/dark mode toggle
 - Live previews
 - Fullscreen mode
-- Cross platform
+- Cross-platform compatibility
 

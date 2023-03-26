@@ -12,14 +12,15 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> screensList = [
-    const HomeScreen(),
-    const AccountScreen(),
+    const HomeScreen(), //Creating HomeScreen object
+    const AccountScreen(), //Creating AccountScreen object
   ];
-  int currentIndex = 0;
+  int currentIndex = 0; //Setting current index to 0 initially
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width / baseWidth;
+    double deviceWidth = MediaQuery.of(context).size.width /
+        baseWidth; //Getting device width using mediaquery
 
     return WillPopScope(
       onWillPop: () async {
@@ -27,13 +28,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return true;
         } else {
           setState(() {
-            currentIndex = 0;
+            currentIndex = 0; //Updating currentIndex to 0
           });
           return false;
         }
       },
       child: Scaffold(
-        body: screensList[currentIndex],
+        body: screensList[currentIndex], //Displaying screensList widget
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.access_alarm),
@@ -57,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     MaterialButton(
                       onPressed: () {
                         setState(() {
-                          currentIndex = 0;
+                          currentIndex = 0; //Updating currentIndex to 0
                         });
                       },
                       minWidth: 40,
@@ -66,8 +67,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Icon(
                             currentIndex == 0
-                                ? Icons.home
-                                : Icons.home_outlined,
+                                ? Icons
+                                    .home //Setting Home icon to filled if currentIndex is 0
+                                : Icons
+                                    .home_outlined, //Setting Home icon to outlined if currentIndex is not 0
                             color:
                                 currentIndex == 0 ? primaryColor : Colors.black,
                           ),
@@ -112,7 +115,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     MaterialButton(
                       onPressed: () {
                         setState(() {
-                          currentIndex = 1;
+                          currentIndex = 1; //Updating currentIndex to 1
                         });
                       },
                       minWidth: 40,
@@ -121,8 +124,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Icon(
                             currentIndex == 1
-                                ? Icons.person_2
-                                : Icons.person_2_outlined,
+                                ? Icons
+                                    .person_2 //Setting Account icon to filled if currentIndex is 1
+                                : Icons
+                                    .person_2_outlined, //Setting Account icon to outlined if currentIndex is not 1
                             color:
                                 currentIndex == 1 ? primaryColor : Colors.black,
                           ),
