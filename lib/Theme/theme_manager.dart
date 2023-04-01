@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ThemeManager with ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.dark;
+  ThemeMode themeMode = ThemeMode.system;
 
-  bool get isDarkMode => _themeMode == ThemeMode.dark;
-  get getThemeMode => _themeMode;
+  get getThemeMode => themeMode;
 
-  void changeTheme(bool isDarkTheme) {
-    print('isDarkTheme $isDarkTheme');
-    _themeMode = isDarkTheme? ThemeMode.dark: ThemeMode.light;
+  void toggleTheme() {
+    switch (themeMode) {
+      case ThemeMode.dark:
+        themeMode = ThemeMode.light;
+        break;
+      case ThemeMode.light:
+        themeMode = ThemeMode.dark;
+        break;
+      case ThemeMode.system:
+        themeMode = ThemeMode.dark;
+        break;
+      default:
+        themeMode = ThemeMode.system;
+        break;
+    }
     notifyListeners();
   }
-
-  // ThemeData _themeData = DashAppTheme.light();
-  // bool get isDarkTheme => _themeData == DashAppTheme.dark();
-  // ThemeData get getThemeData => _themeData;
-  // void changeTheme(isDarkTheme){
-  //   _themeData = isDarkTheme? ThemeData.dark(): ThemeData.light();
-  //   notifyListeners();
-  // }
 }

@@ -18,40 +18,36 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await UserPrefrences.init();
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => ThemeManager(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => CategoriesProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => SharedPrefrencesProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => UserPostsProvider(),
-    )
-  ], child: const MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        theme: MyThemes.lightTheme,
-        darkTheme: MyThemes.darkTheme,
-        routeInformationParser: MyAppRoutes().goRouter.routeInformationParser,
-        routerDelegate: MyAppRoutes().goRouter.routerDelegate,
-      );
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeManager(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GoogleSignInProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CategoriesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SharedPrefrencesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserPostsProvider(),
+        )
+      ],
+      child: Builder(builder: (context) {
+        final provider = Provider.of<ThemeManager>(context);
+        return MaterialApp.router(
+          routerConfig: MyAppRoutes().goRouter,
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          themeMode: provider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+        );
+      })));
 }

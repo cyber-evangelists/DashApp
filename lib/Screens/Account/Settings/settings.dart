@@ -10,18 +10,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ThemeManager>(context);
     return Scaffold(
       body: Center(
         child: Switch(
-          value: Provider.of<ThemeManager>(context).isDarkMode,
-          onChanged: (value) {
-            Provider.of<ThemeManager>(context,listen: false).changeTheme(value);
-          },
-        ),
+            value: provider.themeMode == ThemeMode.dark ? true : false,
+            onChanged: (_) => context.read<ThemeManager>().toggleTheme()),
       ),
     );
   }
