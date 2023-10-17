@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_app/models/categories.dart';
 import 'package:dash_app/models/resturant.dart';
@@ -39,12 +37,12 @@ class FirebaseDataMethods {
       return FirebaseFirestore.instance
           .collection('UserPosts')
           .doc(_auth.currentUser!.uid)
-          .collection('Posts').get().then((snapshot) => snapshot.docs
-              .map((doc) => doc.data())
-              .toList());
-          // .snapshots()
-          // .map((snapshot) =>
-          //     snapshot.docs.map((doc) => doc.data()).toList());
+          .collection('Posts')
+          .get()
+          .then((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+      // .snapshots()
+      // .map((snapshot) =>
+      //     snapshot.docs.map((doc) => doc.data()).toList());
     } catch (error) {
       debugPrint(error.toString());
     }

@@ -1,16 +1,11 @@
 import 'package:dash_app/Screens/TableReservationScreen/ui/top_card.dart';
-import 'package:dash_app/Theme/theme_manager.dart';
-import 'package:dash_app/const.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TableResevationScreen extends StatelessWidget {
   const TableResevationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = getDeviceWidth(context);
-    final provider = Provider.of<ThemeManager>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(238, 241, 242, 1),
@@ -22,8 +17,8 @@ class TableResevationScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: const [TableReservationScreenTopcard()],
+      body: const Column(
+        children: [TableReservationScreenTopcard()],
       ),
     ); //git
   }

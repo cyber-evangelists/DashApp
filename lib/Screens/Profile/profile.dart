@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:dash_app/Firebase/imagepick.dart';
-import 'package:dash_app/Firebase/read_data.dart';
 import 'package:dash_app/Firebase/storage_methods.dart';
 import 'package:dash_app/Provider/user.dart';
 import 'package:dash_app/Provider/user_posts.dart';
